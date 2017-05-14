@@ -1,16 +1,4 @@
-#**Behavioral Cloning** 
-
----
-
-**Behavioral Cloning Project**
-
-The goals / steps of this project are the following:
-
-* Use the simulator to collect data of good driving behavior
-* Build, a convolution neural network in Keras that predicts steering angles from images
-* Train and validate the model with a training and validation set
-* Test that the model successfully drives around track one without leaving the road
-* Summarize the results with a written report
+# Behavioral Cloning Project
 
 [//]: # (Image References)
 
@@ -22,61 +10,49 @@ The goals / steps of this project are the following:
 [image7]: ./examples/center_2017_04_09_14_44_02_952.jpg "Normal Image"
 [image8]: ./examples/center_2017_04_09_14_44_02_952_flipped.jpg "Flipped Image"
 
----
-###Files Submitted & Code Quality
 
-####1. Submission includes all required files and can be used to run the simulator in autonomous mode
+## Goals
 
-My project includes the following files:
+The goals / steps of this project are the following:
 
-* `model.py` containing the script to create and train the model
-* `drive.py` for driving the car in autonomous mode *(unchanged from original github code)*
-* `model.h5` containing a trained convolution neural network
-* `video.mp4` video of the vehicle completing the track in autonomous mode
-* `writeup_report.md` this file summarizing the results
-* `examples/*` images relating to this file
-* `model.pdf` file generated with training and validation loss information on various models and parameters
+* Use the simulator to collect data of good driving behavior
+* Build, a convolution neural network in Keras that predicts steering angles from images
+* Train and validate the model with a training and validation set
+* Test that the model successfully drives around track one without leaving the road
+* Summarize the results with a written report
 
-####2. Submission includes functional code
-Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 
-```sh
-python drive.py model.h5
-```
+## Model Architecture and Training Strategy
 
-####3. Submission code is usable and readable
-
-The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
-
-###Model Architecture and Training Strategy
-
-####1. An appropriate model architecture has been employed
+### Architecture
 
 My model(s) consist of convolution neural networks with 5x5 and 3x3 filter sizes and depths between 24 and 64 (`model.py` lines 104-153).
 
 The models includes RELU layers to introduce nonlinearity (`model.py` lines 104-153), and the data is normalized in the model using a Keras lambda layer (`model.py` line 102).
 
-####2. Attempts to reduce overfitting in the model
+
+### Reduce overfitting in the model
 
 The model contains dropout layers in order to reduce overfitting (`model.py` lines 104-153).
 
 The model was trained and validated on different data sets to ensure that the model was not overfitting (`model.py` lines 160-164). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
-####3. Model parameter tuning
+
+### Model parameter tuning
 
 The model used an adam optimizer (`model.py` line 157).  While manually training the learning rate wasn't necessary, I experimented with values of 0.001 and 0.0001 (the default for Keras) to see if there would be any significant changes.
 
 The iterative approach taken to model selection also varied the Batch Size and Dropout rates to investigate possible solutions.
 
-####4. Appropriate training data
+
+### Appropriate training data
 
 Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road, driving the lap in the opposite direction and additional training data on specialised areas such as the bridge and areas with dirt access roads.
 
 For further details about how I created the training data, see the next section.
 
-###Model Architecture and Training Strategy
 
-####1. Solution Design Approach
+### Solution Design Approach
 
 The overall strategy for deriving a model architecture was to use the `nvidia` model as a starting point.
 
@@ -132,7 +108,8 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 Note that in early attempts, there were a few spots where the vehicle left the track.  The most significant problem originally was the incorrect BGR and RGB colour spaces from OpenCV and the simulator.  I also provided additional training data for any interesting areas, as discussed in section 3 below.
 
-####2. Final Model Architecture
+
+### Final Model Architecture
 
 The final model architecture (`model.py` lines 104-153) consisted of a convolution neural network with the following layers and layer sizes.
 
@@ -154,7 +131,8 @@ The final model architecture (`model.py` lines 104-153) consisted of a convoluti
 | 14    | Dense         | 10 Neurons                                          | 50       | 10       |
 | 15    | Dense         | 1 Neuron                                            | 10       | 1        |
 
-####3. Creation of the Training Set & Training Process
+
+### Creation of the Training Set & Training Process
 
 To capture good driving behavior, I first recorded three laps on track one using center lane driving. Here is an example image of center lane driving:
 
